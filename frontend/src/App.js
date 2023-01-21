@@ -1,84 +1,54 @@
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 import { React, useState, useCallback } from "react";
 import { GoogleMap, useJsApiLoader, InfoWindow } from "@react-google-maps/api";
 import MarkerPopup from "./components/Marker.js";
 
 =======
+=======
+import Main from "./components/Main";
+>>>>>>> d81b1c70b5f089f87863fdf27b1afc54603a36db
 import NavigationBar from "./components/NavigationBar.js";
 import { Routes, Route } from "react-router-dom";
 import Map from "./components/Map.js";
 import LandingPage from "./LandingPage.js";
+<<<<<<< HEAD
 >>>>>>> Stashed changes
+=======
+>>>>>>> d81b1c70b5f089f87863fdf27b1afc54603a36db
 function App() {
-  const { isLoaded } = useJsApiLoader({
-    id: "google-map-script",
-    googleMapsApiKey: "AIzaSyDUjer0xzwRLAfa6hJs7oOyKSLd9YovfCE",
-  });
-  const containerStyle = {
-    width: "100vw",
-    height: "100vh",
-  };
-
-  const center = {
-    lat: 50,
-    lng: 30,
-  };
-
-  const [map, setMap] = useState(null);
-
-  const onLoad = useCallback(function callback(map) {
-    const bounds = new window.google.maps.LatLngBounds(center);
-    map.fitBounds(bounds);
-
-    setMap(map);
-  });
-
-  const onUnmount = useCallback(function callback(map) {
-    setMap(null);
-  });
-
-  //useState Handlers
-  const [markers, setMarkers] = useState([]);
-
-  const onClickHandler = (event) => {
-    setMarkers([...markers, { coordinates: event.latLng, isVisible: false }]);
-  };
-
-  const markerClickHandler = (i) => {
-    const tempMarkers = [...markers];
-    tempMarkers[i].isVisible = !tempMarkers[i].isVisible;
-    setMarkers(tempMarkers);
-  };
-
-  return isLoaded ? (
-    <GoogleMap
-      mapContainerStyle={containerStyle}
-      center={center}
-      zoom={7}
-      onLoad={onLoad}
-      onUnmount={onUnmount}
-      onClick={onClickHandler}
-    >
-      {markers.map((marker, i) => {
-        return (
-          <div>
-            {marker.isVisible ? (
-              <InfoWindow position={marker.coordinates}>
-                <h1>Info</h1>
-              </InfoWindow>
-            ) : (
-              <></>
-            )}
-            <MarkerPopup
-              click={() => markerClickHandler(i)}
-              coordinates={marker.coordinates}
-            />
-          </div>
-        );
-      })}
-    </GoogleMap>
-  ) : (
-    <></>
+  return (
+    <div>
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <div>
+              <NavigationBar />
+              <LandingPage />
+            </div>
+          }
+        ></Route>
+        <Route
+          path="/map"
+          element={
+            <div>
+              <NavigationBar />
+              <Map />
+            </div>
+          }
+        ></Route>
+        <Route
+          path="/contact"
+          element={
+            <div>
+              <NavigationBar />
+              <h1>Contact</h1>
+            </div>
+          }
+        ></Route>
+      </Routes>
+    </div>
   );
 }
 
