@@ -5,8 +5,12 @@ import LandingPage from "../LandingPage.js";
 function Main() {
   return (
     <Routes>
-      <Route path="/" element={LandingPage}></Route>
-      <Route path="/map" element={Map}></Route>
+      <Route path="/">
+        <LandingPage />
+      </Route>
+      <Route path="/map">
+        <Map />
+      </Route>
     </Routes>
   );
 }
