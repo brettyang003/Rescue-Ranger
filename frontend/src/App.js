@@ -1,7 +1,14 @@
+<<<<<<< Updated upstream
 import { React, useState, useCallback } from "react";
 import { GoogleMap, useJsApiLoader, InfoWindow } from "@react-google-maps/api";
 import MarkerPopup from "./components/Marker.js";
 
+=======
+import NavigationBar from "./components/NavigationBar.js";
+import { Routes, Route } from "react-router-dom";
+import Map from "./components/Map.js";
+import LandingPage from "./LandingPage.js";
+>>>>>>> Stashed changes
 function App() {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
