@@ -1,4 +1,4 @@
-import { React, useState, useCallback } from "react";
+import { React, useState, useCallback, useEffect } from "react";
 import { GoogleMap, useJsApiLoader, InfoWindow } from "@react-google-maps/api";
 import MarkerPopup from "./Marker.js";
 
@@ -43,6 +43,7 @@ function Map() {
     setMarkers(tempMarkers);
   };
 
+  useEffect(() => {});
   return isLoaded ? (
     <GoogleMap
       mapContainerStyle={containerStyle}
