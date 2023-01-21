@@ -20,10 +20,6 @@ function NavigationBar() {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <div
-        class="container-fluid px-0 bg-secondary text-li"
-        style={{ height: "100vh" }}
-      ></div>
     </div>
   );
 }
