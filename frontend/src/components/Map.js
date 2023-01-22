@@ -1,15 +1,14 @@
 import { React, useState, useCallback, useEffect } from "react";
-import { GoogleMap, useJsApiLoader, InfoWindow } from "@react-google-maps/api";
-import MarkerPopup from "./Marker.js";
-import { db } from "../firestore.js";
 import {
-  collection,
-  getDocs,
-  query,
-  where,
-  onSnapshot,
-} from "firebase/firestore";
+  GoogleMap,
+  useJsApiLoader,
+  InfoWindow,
+  Marker,
+} from "@react-google-maps/api";
+import { db } from "../firestore.js";
+import { collection, query, onSnapshot } from "firebase/firestore";
 import RetrieveFile from "../api/RetrieveFile.js";
+import MarkerPopup from "./Marker.js";
 
 function Map() {
   const { isLoaded } = useJsApiLoader({
@@ -22,8 +21,8 @@ function Map() {
   };
 
   const center = {
-    lat: 50,
-    lng: 30,
+    lat: 43,
+    lng: -79,
   };
 
   const [map, setMap] = useState(null);
@@ -42,6 +41,7 @@ function Map() {
   //useState Handlers
   const [markers, setMarkers] = useState([]);
   const [markerData, setMarkerData] = useState();
+
   const onClickHandler = (event) => {
     setMarkers([...markers, { coordinates: event.latLng, isVisible: false }]);
   };
@@ -63,14 +63,20 @@ function Map() {
   const getData = async () => {
     const q = query(collection(db, "marker"));
     onSnapshot(q, (querySnapshot) => {
-      let markers = [];
+      let markerList = [];
+      let markerCoords = [];
       querySnapshot.forEach((doc) => {
-        markers.push(doc.data());
+        markerList.push(doc.data());
+        let newCoords = new window.google.maps.LatLng(
+          doc.data().lat,
+          doc.data().lon
+        );
+        markerCoords.push({ coordinates: newCoords, isVisible: false });
       });
-      console.log(markers);
+      setMarkers(markerCoords);
+      setMarkerData(markerList);
     });
   };
-
   useEffect(() => {
     getData();
   }, []);
@@ -80,7 +86,7 @@ function Map() {
       mapContainerStyle={containerStyle}
       mapTypeId="satellite"
       center={center}
-      zoom={7}
+      zoom={5}
       onLoad={onLoad}
       onUnmount={onUnmount}
       onClick={onClickHandler}
@@ -90,14 +96,14 @@ function Map() {
           <div>
             {marker.isVisible ? (
               <InfoWindow position={marker.coordinates}>
-                <RetrieveFile position={marker.coordinates} data={markerData} />
+                <RetrieveFile cid={markerData[i].cid} />
               </InfoWindow>
             ) : (
               <></>
             )}
-            <MarkerPopup
-              click={() => markerClickHandler(i)}
-              coordinates={marker.coordinates}
+            <Marker
+              onClick={() => markerClickHandler(i)}
+              position={marker.coordinates}
             />
           </div>
         );
