@@ -2,7 +2,13 @@ import { React, useState, useCallback, useEffect } from "react";
 import { GoogleMap, useJsApiLoader, InfoWindow } from "@react-google-maps/api";
 import MarkerPopup from "./Marker.js";
 import { db } from "../firestore.js";
-import { collection, getDocs } from "firebase/firestore";
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  onSnapshot,
+} from "firebase/firestore";
 import RetrieveFile from "../api/RetrieveFile.js";
 
 function Map() {
@@ -46,17 +52,28 @@ function Map() {
     setMarkers(tempMarkers);
   };
 
+  //   const getData = async () => {
+  //     const querySnapshot = await getDocs(collection(db, "marker"));
+  //     setMarkerData(markerData);
+  //     querySnapshot.forEach((doc) => {
+  //       console.log(`${doc.id} => ${doc.data().cid}`);
+  //     });
+  //   };
+
   const getData = async () => {
-    const querySnapshot = await getDocs(collection(db, "markers"));
-    setMarkerData(markerData);
-    querySnapshot.forEach((doc) => {
-      console.log(`${doc.id} => ${doc.data()}`);
+    const q = query(collection(db, "marker"));
+    onSnapshot(q, (querySnapshot) => {
+      let markers = [];
+      querySnapshot.forEach((doc) => {
+        markers.push(doc.data());
+      });
+      console.log(markers);
     });
   };
 
   useEffect(() => {
     getData();
-  });
+  }, []);
 
   return isLoaded ? (
     <GoogleMap
