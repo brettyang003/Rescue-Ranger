@@ -86,7 +86,6 @@ function Map() {
       mapContainerStyle={containerStyle}
       mapTypeId="satellite"
       center={center}
-      zoom={5}
       onLoad={onLoad}
       onUnmount={onUnmount}
       onClick={onClickHandler}
