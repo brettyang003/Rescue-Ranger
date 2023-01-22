@@ -3,7 +3,7 @@ import ListGroup from 'react-bootstrap/ListGroup';
 
 function What() {
   return (
-    <div style={{paddingLeft:"10%", paddingRight: "10%", fontFamily: "Oswald"}}>
+    <div style={{paddingLeft:"10%", paddingRight: "10%", fontFamily: "Oswald", paddingTop:"20%"}}>
         <ListGroup>
         <ListGroup.Item>Our customized robots navigate through debris in a way that humans cannot.</ListGroup.Item>
         <ListGroup.Item>Our rovers perform facial recognition after detecting motion.</ListGroup.Item>

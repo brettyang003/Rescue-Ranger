@@ -21,8 +21,8 @@ function ControlledCarousel() {
           style={{borderStyle: "solid", borderWidth: "10px", borderColor: "white"}}
         />
         <Carousel.Caption>
-          <h3 style={{fontSize: "50px", fontFamily: "Oswald"}}>15,000+</h3>
-          <p style={{fontSize: "30px", fontFamily: "Oswald"}}>People have received help due to our app.</p>
+          <h3 style={{fontSize: "15px", fontFamily: "Oswald"}}>15,000+</h3>
+          <p style={{fontSize: "12px", fontFamily: "Oswald"}}>People have received help due to our app.</p>
         </Carousel.Caption>
       </Carousel.Item>
 
@@ -35,8 +35,8 @@ function ControlledCarousel() {
         />
 
         <Carousel.Caption>
-          <h3 style={{fontSize: "50px", fontFamily: "Oswald"}}>15,000+</h3>
-          <p style={{fontSize: "30px", fontFamily: "Oswald"}}>People have been reported missing since the start of the war.</p>
+          <h3 style={{fontSize: "15px", fontFamily: "Oswald"}}>15,000+</h3>
+          <p style={{fontSize: "12px", fontFamily: "Oswald"}}>People have been missing since the start of the war.</p>
         </Carousel.Caption>
       </Carousel.Item>
 
@@ -49,8 +49,8 @@ function ControlledCarousel() {
           style={{borderStyle: "solid", borderWidth: "10px", borderColor: "white"}}
         />
         <Carousel.Caption>
-          <h3 style={{fontSize: "50px", fontFamily: "Oswald"}}>140,000+</h3>
-          <p style={{fontSize: "30px", fontFamily: "Oswald"}}>Residential buildings have been damaged or collapsed, creating more and more debris.</p>
+          <h3 style={{fontSize: "15px", fontFamily: "Oswald"}}>140,000+</h3>
+          <p style={{fontSize: "12px", fontFamily: "Oswald"}}>Buildings have been damaged, creating more debris.</p>
         </Carousel.Caption>
       </Carousel.Item>
 
