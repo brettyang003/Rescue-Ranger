@@ -3,6 +3,7 @@ const request = require("request");
 const https = require("follow-redirects").https;
 const fs = require("fs");
 const fetch = require("node-fetch");
+const geolocation = require("geolocation");
 
 const app = express();
 app.use(express.json());
@@ -41,7 +42,7 @@ async function uploadImage() {
 
   let postData =
     '------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name="data"; filename="file"\r\nContent-Type: "{Insert_File_Content_Type}"\r\n\r\n' +
-    fs.readFileSync("./detections/detected.png") +
+    fs.readFileSync(`${path}`) +
     '\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW\r\nContent-Disposition: form-data; name="filename"\r\n\r\nfile\r\n------WebKitFormBoundary7MA4YWxkTrZu0gW--';
 
   req.setHeader(

@@ -12,6 +12,7 @@
     "cors": "^2.8.5",
     "follow-redirects": "^1.15.2",
     "fs": "^0.0.1-security",
+    "geolocation": "^0.2.0",
     "node-fetch": "^2.6.8",
     "request": "^2.88.2"
   }
