@@ -2,6 +2,7 @@ import os
 import requests
 import time
 from location import get_location
+from firebase import db
 
 
 path = "./detections/detected.png"
