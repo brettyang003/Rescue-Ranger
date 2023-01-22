@@ -1,0 +1,202 @@
+
+#define lb1 4
+#define lb2 2
+#define rb1 7
+#define rb2 3
+
+#define rf1 8
+#define rf2 9
+#define lf1 10
+#define lf2 11
+
+#define rightIR 12
+#define leftIR 13
+
+#define trig 5
+#define echo 6
+
+int human_detected = 0;
+int front_obstacle_distance = 0;
+int left_obstacle = 0;
+int right_obstacle = 0;
+
+void setup() {
+  // put your setup code here, to run once:
+  pinMode(lb1, OUTPUT);
+  pinMode(lb2, OUTPUT);
+  pinMode(rb1, OUTPUT);
+  pinMode(rb2, OUTPUT);
+  pinMode(rf1, OUTPUT);
+  pinMode(rf2, OUTPUT);
+  pinMode(lf1, OUTPUT);
+  pinMode(lf2, OUTPUT);
+
+  pinMode(rightIR, INPUT);
+  pinMode(leftIR, INPUT);
+  pinMode(trig, OUTPUT);
+  pinMode(echo, INPUT);
+
+  Serial.begin(9600); 
+}
+
+void loop() {
+  // put your main code here, to run repeatedly:
+  front_obstacle_distance = ultrasonic_dist();
+  // Rover doesn't detect humans and keeps moving
+
+  left_obstacle = digitalRead(leftIR);
+  right_obstacle = digitalRead(rightIR);
+  
+  Serial.println(front_obstacle_distance);
+
+  if (front_obstacle_distance < 50)
+  {
+      Serial.println("Obstacle Detected");
+      if (left_obstacle == HIGH) //turn left
+      {
+        brake();
+        delay(500);
+        Serial.print("No Object on Left");
+        fast_left();
+        delay(1000);
+      }
+      else if (right_obstacle == HIGH) //turn right
+      {
+        brake();
+        delay(500);
+        Serial.print("No Object on Right");
+        fast_right();
+        delay(1000);
+      }
+      else // turn left until something changes
+      {
+        Serial.print("SPINNNN");
+        fast_right();
+        delay(1000);
+      }
+  }
+  else // go forward
+  {
+    Serial.println("Obstacle NOT Detected");
+    forward();
+    delay(1000);
+  }    
+}
+
+
+
+int ultrasonic_dist()
+{
+  digitalWrite(trig, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trig, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(echo, LOW);
+
+  pinMode(echo, INPUT);
+  int duration = pulseIn(echo, HIGH);
+  int dist_cm = microsecondsToCentimeters(duration);
+
+  return dist_cm;
+}
+
+void forward()
+{
+  digitalWrite(lb1, HIGH); 
+  digitalWrite(lb2, LOW);
+  
+  digitalWrite(rb1, HIGH);
+  digitalWrite(rb2, LOW);
+  
+  
+  digitalWrite(rf1, HIGH);
+  digitalWrite(rf2, LOW);
+  
+  digitalWrite(lf1, HIGH);
+  digitalWrite(lf2, LOW);
+}
+
+void slow_left()
+{
+  digitalWrite(lb1, HIGH); 
+  digitalWrite(lb2, LOW);
+  
+  digitalWrite(rb1, HIGH);
+  digitalWrite(rb2, LOW);
+  
+  
+  digitalWrite(rf1, HIGH);
+  digitalWrite(rf2, LOW);
+  
+  digitalWrite(lf1, LOW);
+  digitalWrite(lf2, LOW);
+}  
+
+void slow_right()
+{
+  digitalWrite(lb1, HIGH); 
+  digitalWrite(lb2, LOW);
+  
+  digitalWrite(rb1, HIGH);
+  digitalWrite(rb2, LOW);
+  
+  
+  digitalWrite(rf1, LOW);
+  digitalWrite(rf2, LOW);
+  
+  digitalWrite(lf1, HIGH);
+  digitalWrite(lf2, LOW);
+}  
+
+void fast_right()
+{
+  digitalWrite(lb1, LOW); 
+  digitalWrite(lb2, LOW);
+  
+  digitalWrite(rb1, LOW);
+  digitalWrite(rb2, HIGH);
+  
+  
+  digitalWrite(rf1, LOW);
+  digitalWrite(rf2, LOW);
+  
+  digitalWrite(lf1, HIGH);
+  digitalWrite(lf2, LOW);
+}
+
+void fast_left()
+{
+  digitalWrite(lb1, LOW); 
+  digitalWrite(lb2, HIGH);
+  
+  digitalWrite(rb1, LOW);
+  digitalWrite(rb2, LOW);
+  
+  
+  digitalWrite(rf1, HIGH);
+  digitalWrite(rf2, LOW);
+  
+  digitalWrite(lf1, LOW);
+  digitalWrite(lf2, LOW);
+}
+
+void brake()
+{
+  digitalWrite(lb1, LOW); 
+  digitalWrite(lb2, LOW);
+  
+  digitalWrite(rb1, LOW);
+  digitalWrite(rb2, LOW);
+  
+  
+  digitalWrite(rf1, LOW);
+  digitalWrite(rf2, LOW);
+  
+  digitalWrite(lf1, LOW);
+  digitalWrite(lf2, LOW);
+}
+
+
+long microsecondsToCentimeters(long microseconds) {
+   return microseconds / 29 / 2;
+}
