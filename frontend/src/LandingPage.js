@@ -21,7 +21,7 @@ function LandingPage() {
     <div
         className="container-fluid px-0"
       >
-        <div id="first-page" style={{backgroundColor: "#1f1e1e"}}>
+        <div id="first-page" style={{backgroundColor: "#1f1e1e", width:"100vw"}}>
           <div className="row" id="project-title" style={ {height: "70vh"} }>
             <div className="col-sm">
               <h2 class="text-center" style={ {fontSize: "80px", color: "white",
@@ -39,7 +39,7 @@ function LandingPage() {
           </div>
         </div>
           <div style = {{ height: "4px", backgroundColor: "white"}}></div>  
-          <div id="tp" className="row" style={ {height: "100vh", backgroundColor: "#1f1e1e"} }>
+          <div id="tp" className="row" style={ {height: "100vh", backgroundColor: "#1f1e1e", width:"100vw"} }>
             <div className="col-sm">
               <AboutTheProject />
             </div>
