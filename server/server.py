@@ -3,6 +3,7 @@ import requests
 import time
 from location import get_location
 from firebase import db
+import json
 
 
 path = "./detections/detected.png"
@@ -21,10 +22,19 @@ def upload_image():
         response = requests.post(url, headers=headers, data=data, files=files)
 
         print(response.text)
-        
         # Get current location
-        lat, lon = get_location()
+        # lat, lon = get_location()
+        lat, lon = 43.7081, -79.4479
         print(lat, lon)
+        data = {
+            u'lat': lat,
+            u'lon': lon,
+            u'cid': response.json()['cid'],
+            u'is_rescued': False
+        }
+
+        update_time, city_ref = db.collection(u'marker').add(data)
+        print(f'Inserted {city_ref} at {update_time}')
 
 def watch_folder():
     while True:
