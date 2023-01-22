@@ -42,10 +42,6 @@ function Map() {
   const [markers, setMarkers] = useState([]);
   const [markerData, setMarkerData] = useState();
 
-  const onClickHandler = (event) => {
-    setMarkers([...markers, { coordinates: event.latLng, isVisible: false }]);
-  };
-
   const markerClickHandler = (i) => {
     const tempMarkers = [...markers];
     tempMarkers[i].isVisible = !tempMarkers[i].isVisible;
@@ -88,7 +84,6 @@ function Map() {
       center={center}
       onLoad={onLoad}
       onUnmount={onUnmount}
-      onClick={onClickHandler}
     >
       {markers.map((marker, i) => {
         return (
