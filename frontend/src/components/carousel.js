@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
-import people from '../assets/missing_people.webp';
+import saved from '../assets/saved.webp';
+import buildings from '../assets/buildings.webp';
+import missing from '../assets/missing.webp';
 
 function ControlledCarousel() {
   const [index, setIndex] = useState(0);
@@ -14,42 +16,44 @@ function ControlledCarousel() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src={people}
-          alt="First debris picture"
-          style={{height: "600px", width: "300px"}}
+          src={saved}
+          alt="How many people have we rescued"
+          style={{borderStyle: "solid", borderWidth: "10px", borderColor: "white"}}
         />
         <Carousel.Caption>
-          <h3>First slide label</h3>
-          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+          <h3 style={{fontSize: "50px", fontFamily: "Oswald"}}>15,000+</h3>
+          <p style={{fontSize: "30px", fontFamily: "Oswald"}}>People have received help due to our app.</p>
         </Carousel.Caption>
       </Carousel.Item>
+
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="holder.js/800x400?text=Second slide&bg=282c34"
-          alt="Second slide"
+          src={missing}
+          alt="How many people have been missing"
+          style={{borderStyle: "solid", borderWidth: "10px", borderColor: "white"}}
         />
 
         <Carousel.Caption>
-          <h3>Second slide label</h3>
-          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+          <h3 style={{fontSize: "50px", fontFamily: "Oswald"}}>15,000+</h3>
+          <p style={{fontSize: "30px", fontFamily: "Oswald"}}>People have been reported missing since the start of the war.</p>
         </Carousel.Caption>
       </Carousel.Item>
+
+
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="holder.js/800x400?text=Third slide&bg=20232a"
-          alt="Third slide"
-          style={{height: "600px"}}
+          src={buildings}
+          alt="How many buildings have collapsed"
+          style={{borderStyle: "solid", borderWidth: "10px", borderColor: "white"}}
         />
-
         <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
+          <h3 style={{fontSize: "50px", fontFamily: "Oswald"}}>140,000+</h3>
+          <p style={{fontSize: "30px", fontFamily: "Oswald"}}>Residential buildings have been damaged or collapsed, creating more and more debris.</p>
         </Carousel.Caption>
       </Carousel.Item>
+
     </Carousel>
   );
 }
