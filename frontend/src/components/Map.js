@@ -13,7 +13,7 @@ import MarkerPopup from "./Marker.js";
 function Map() {
   const { isLoaded } = useJsApiLoader({
     id: "google-map-script",
-    googleMapsApiKey: "AIzaSyDUjer0xzwRLAfa6hJs7oOyKSLd9YovfCE",
+    googleMapsApiKey: process.env.GOOGLE_MAPS_API_KEY,
   });
   const containerStyle = {
     width: "100vw",
